@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia2-deployment
+  labels:
+    app: kubia2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia2
+  template:
+    metadata:
+      labels:
+        app: kubia2
+    spec:
+      containers:
+      - name: kubia2
+        image: amisovic/kubia:23
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubia2-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: kubia2
+  ports:
+  # Default port used by the image
+  - port: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubia2-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/kubia2"
+        backend:
+          service:
+            name: kubia2-service
+            port:
+              number: 8080
+
+
