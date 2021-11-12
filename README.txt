@@ -28,7 +28,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 argocd login <ARGOCD_SERVER>
 argocd account update-password
 # Port-forward to the ArgoCD server
-kubectl port-forward svc/argocd-server -n argocd 8080:443 --address='0.0.0.0'
+kubectl port-forward svc/argocd-server -n argocd 8888:443 --address='0.0.0.0' &
 # Create ingress /argocd ???
 kubectl apply -f 3-ArgoCD/IngressArgoCD.yaml
 
