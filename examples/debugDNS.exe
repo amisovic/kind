@@ -1,4 +1,3 @@
-
 echo "------------------------------------------------"
 echo "Check if kubernetes.default DNS server is reachable" 
 echo "------------------------------------------------"
@@ -23,3 +22,22 @@ echo "------------------------------------------------"
 echo "Check Log files of the DNS servers"
 echo "------------------------------------------------"
 kubectl logs --namespace=kube-system -l k8s-app=kube-dns
+
+echo ""
+echo "------------------------------------------------"
+echo "SERVICES in kube-system"
+echo "------------------------------------------------"
+kubectl get svc --namespace=kube-system
+
+echo ""
+echo "------------------------------------------------"
+echo "ENDPOINTS in kube-system"
+echo "------------------------------------------------"
+kubectl get endpoints kube-dns --namespace=kube-system
+
+echo ""
+echo "------------------------------------------------"
+echo "CONFIGMAP of coredns service"
+echo "------------------------------------------------"
+kubectl -n kube-system get  configmap coredns -o yaml
+
