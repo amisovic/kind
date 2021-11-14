@@ -1,3 +1,4 @@
+
 echo "------------------------------------------------"
 echo "Check if kubernetes.default DNS server is reachable" 
 echo "------------------------------------------------"
