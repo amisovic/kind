@@ -1,12 +1,12 @@
 echo "------------------------------------------------"
-echo "Check if kubernetes.default DNS server is reachable" 
+echo "Check if kubernetes.default DNS server is reachable from dnsutils test pod" 
 echo "------------------------------------------------"
 kubectl exec -i -t dnsutils -- nslookup kubernetes.default
 kubectl exec -i -t dnsutils -- nslookup github.com
 
 echo ""
 echo "------------------------------------------------"
-echo "Check if the /etc/resolv.conf is correct"
+echo "Check if the /etc/resolv.conf is correct on the dnsutils test pod"
 echo "------------------------------------------------"
 kubectl exec -ti dnsutils -- cat /etc/resolv.conf
 
