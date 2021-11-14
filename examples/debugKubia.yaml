@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubiautils
+  namespace: default
+spec:
+  containers:
+  - name: kubiautils
+    image: amisovic/kubia:21
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+

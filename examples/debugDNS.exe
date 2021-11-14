@@ -1,0 +1,24 @@
+echo "------------------------------------------------"
+echo "Check if kubernetes.default DNS server is reachable" 
+echo "------------------------------------------------"
+kubectl exec -i -t dnsutils -- nslookup kubernetes.default
+kubectl exec -i -t dnsutils -- nslookup github.com
+
+echo ""
+echo "------------------------------------------------"
+echo "Check if the /etc/resolv.conf is correct"
+echo "------------------------------------------------"
+kubectl exec -ti dnsutils -- cat /etc/resolv.conf
+
+echo ""
+echo "------------------------------------------------"
+echo "Check if DNS server is running"
+echo "------------------------------------------------"
+kubectl get pods --namespace=kube-system -l k8s-app=kube-dns
+
+
+echo ""
+echo "------------------------------------------------"
+echo "Check Log files of the DNS servers"
+echo "------------------------------------------------"
+kubectl logs --namespace=kube-system -l k8s-app=kube-dns
