@@ -3028,7 +3028,7 @@ spec:
         - /shared/argocd-dex
         - rundex
         image: ghcr.io/dexidp/dex:v2.27.0
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: dex
         ports:
         - containerPort: 5556
@@ -3050,7 +3050,7 @@ spec:
         - /usr/local/bin/argocd
         - /shared/argocd-dex
         image: quay.io/argoproj/argocd:v2.1.5
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: copyutil
         volumeMounts:
         - mountPath: /shared

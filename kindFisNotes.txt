@@ -1,0 +1,20 @@
+- Install kind (downloaded on PC and SFTP-ed to server) - copy to  /usr/local/bin
+- Downloading images was veryyy slow via SQUID 10.49*** .... consider copying image from this server if needed. 
+- Setup auto-complete, add ~/.bashrc, install package
+
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+
+export http_proxy="http://10.49.98.4:8080"
+export https_proxy="http://10.49.98.4:8080"
+export NO_PROXY=localhost,127.0.0.1
+
+- Installed kubectl (downloaded on PC and SFTP-ed to server) - copy to  /usr/***
+- Performed bash  auto complete setup per https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/
+- yum install bash-completion
+- Install k9s ((downloaded on PC and SFTP-ed to server) - copy to  /usr/***
+- Install argocd client ((downloaded on PC and SFTP-ed to server) - copy to  /usr/***
+- Install ranger - yum install python3-pip 
+pip3 install ranger-fm
+
