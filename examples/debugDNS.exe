@@ -3,6 +3,7 @@ echo "Check if kubernetes.default DNS server is reachable from dnsutils test pod
 echo "------------------------------------------------"
 kubectl exec -i -t dnsutils -- nslookup kubernetes.default
 kubectl exec -i -t dnsutils -- nslookup github.com
+kubectl exec -i -t dnsutils -- nslookup github.com  10.132.201.50
 
 echo ""
 echo "------------------------------------------------"

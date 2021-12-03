@@ -34,10 +34,12 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 argocd login <ARGOCD_SERVER>
 argocd login 127.0.0.1:8080
 argocd account update-password
-# Port-forward to the ArgoCD server - Does not work(?)
+
+# Create ingress /argocd - NOT WORKING??? Need to check https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/
+# kubectl apply -f 3-ArgoCD/IngressArgoCD.yaml
+
+# As workaround for Ingress, do Port-forward to the ArgoCD server - Works 
 kubectl port-forward svc/argocd-server -n argocd 8888:443 --address='0.0.0.0' &
-# Create ingress /argocd ???
-kubectl apply -f 3-ArgoCD/IngressArgoCD.yaml
 
 # KIND Delete cluster
 kind delete cluster --name djokica

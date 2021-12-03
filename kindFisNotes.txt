@@ -17,4 +17,5 @@ export NO_PROXY=localhost,127.0.0.1
 - Install argocd client ((downloaded on PC and SFTP-ed to server) - copy to  /usr/***
 - Install ranger - yum install python3-pip 
 pip3 install ranger-fm
+- Install helm client ((downloaded on PC and SFTP-ed to server) - copy to  /usr/local/bin
 
