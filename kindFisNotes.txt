@@ -19,3 +19,40 @@ export NO_PROXY=localhost,127.0.0.1
 pip3 install ranger-fm
 - Install helm client ((downloaded on PC and SFTP-ed to server) - copy to  /usr/local/bin
 
+###########################################################
+Image download issue
+
+# Sa masine koje mozemo da skinemo images (u Cloud)
+for i in quay.io/argoproj/argocd:v2.1.5 quay.io/metallb/speaker:main quay.io/metallb/controller:main ghcr.io/dexidp/dex:v2.27.0
+do
+   #Remove / and : from the image name to use it as filename
+   img_file=`echo $i | sed 's/\//\./g' | sed 's/\:/\./g'`
+   echo "Pull the image" 
+   docker pull $i
+   echo "Save image $i to file $img_file.tar" 
+   docker image save -o images/${img_file}.tar $i 
+done
+ 
+# Rsync na masinu koja je odsecen
+rsync e1083457@10.7.150.108:images/* images
+ 
+# Load images iz fajlova
+for i in `ls -1 images/*` 
+do
+   echo "Loading image from file: $i" 
+   docker load < $i
+done
+ 
+# Load images into the KIND cluster 
+for i in quay.io/argoproj/argocd:v2.1.5 quay.io/metallb/speaker:main quay.io/metallb/controller:main ghcr.io/dexidp/dex:v2.27.0
+do
+echo "Loading image into Kind cluster: $i" 
+kind load docker-image $i --name djokica
+done
+
+CONFIRM THAT IMAGES ARE LOADED 
+docker exec -it my-node-name crictl images
+
+From <https://kind.sigs.k8s.io/docs/user/quick-start/> 
+
+

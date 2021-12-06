@@ -8,6 +8,9 @@ kind create cluster --config djokica.yaml
 
 kubectl apply -f 1-Ingress/deployNginxIngres.yaml
 
+# !!!!!!!!!!!!!!!!!!!!!!!
+# LOAD quay.io/ IMAGES FIRST
+# !!!!!!!!!!!!!!!!!!!!!!E
 # Install MetalLB - load balancer
 # https://kind.sigs.k8s.io/docs/user/loadbalancer/
 kubectl apply -f 2-MetalLB/namespace.yaml
@@ -40,6 +43,12 @@ argocd account update-password
 
 # As workaround for Ingress, do Port-forward to the ArgoCD server - Works 
 kubectl port-forward svc/argocd-server -n argocd 8888:443 --address='0.0.0.0' &
+
+# !!!!!!!!!  TO MAKE STARTUP FASTER !!!!!!
+kind load docker-image getraining-docker-snapshot-local.docker.fis.dev/nodetest:20211201_13_137  --name djokica
+
+# !!!!!!!!!  CREATE SECRET !!!!!!!! 
+kubectl create secret docker-registry regcred --docker-server='getraining-docker-snapshot-local.docker.fis.dev'  --docker-username='e1083457' --docker-password='*******' --docker-email='aleksandar.misovic@fisglobal.com'
 
 # KIND Delete cluster
 kind delete cluster --name djokica
