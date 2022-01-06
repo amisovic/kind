@@ -51,8 +51,13 @@ kind: Ingress
 metadata:
   name: example-ingress
 spec:
+  tls:
+  - hosts:
+    - cafe2.example.com
+    secretName: cafe-secret
   rules:
-  - http:
+  - host: cafe2.example.com
+    http:
       paths:
       - pathType: Prefix
         path: /foo

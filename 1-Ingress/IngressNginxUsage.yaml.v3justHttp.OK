@@ -52,7 +52,8 @@ metadata:
   name: example-ingress
 spec:
   rules:
-  - http:
+  - host: cafe2.example.com
+    http:
       paths:
       - pathType: Prefix
         path: /foo
